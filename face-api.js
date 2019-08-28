@@ -1300,6 +1300,7 @@
                 switch (_a.label) {
                     case 0:
                         fetch = env.getEnv().fetch;
+                        console.log(init)
                         return [4 /*yield*/, fetch(url, init, {mode: 'cors'})];
                     case 1:
                         res = _a.sent();
