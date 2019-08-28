@@ -1,6 +1,5 @@
 const webcamElement = document.getElementById('webcam');
 
-
 console.log('Model Promises...')
 
 Promise.all([
