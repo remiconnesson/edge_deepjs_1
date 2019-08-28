@@ -38,8 +38,9 @@ async function app() {
     console.log('.. Done.')
 
     setInterval(async () => {
-        const detections = await faceapi.detectAllFaces(webcamElement, new faceapi.TinyFaceDetectorOptions())
-        const detections = detections.withFaceLandmarks().withFaceExpressions()
+        const detections = await faceapi.detectAllFaces(
+            webcamElement, new faceapi.TinyFaceDetectorOptions()
+            ).withFaceLandmarks().withFaceExpressions()
         console.log(detections)
         }, 100)
     }
