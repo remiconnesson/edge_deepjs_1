@@ -1,11 +1,16 @@
 const webcamElement = document.getElementById('webcam');
 
-//Promise.all([
-//    faceapi.nets.tinyFaceDetector.loadFromUri('/models'),
-//    faceapi.nets.FaceLandmark68Net.loadFromUri('/models'),
-//    faceapi.nets.faceRegognitionNet.loadFromUri('/models'),
-//    faceapi.nets.tinyExpressionNet.loadFromUri('/models'),
-//).then()
+/*
+console.log('Promises...')
+
+Promise.all([
+    faceapi.nets.TinyFaceDetector.loadFromUri('/models'),
+    faceapi.nets.FaceLandmark68Net.loadFromUri('/models'),
+    faceapi.nets.faceRegognitionNet.loadFromUri('/models'),
+    faceapi.nets.tinyExpressionNet.loadFromUri('/models')
+]).then(app)
+*/
+
 
 async function setupWebcam() {
     return new Promise((resolve, reject) => {
@@ -31,16 +36,14 @@ async function app() {
     await setupWebcam();
     console.log('.. Done.');
     console.log('Loading models..');
-    faceapi.nets.tinyFaceDetector.loadFromUri('/models');
-    faceapi.nets.FaceLandmark68Net.loadFromUri('/models');
-    faceapi.nets.faceRegognitionNet.loadFromUri('/models');
-    faceapi.nets.tinyExpressionNet.loadFromUri('/models');
+    faceapi.nets.tinyFaceDetector.loadFromUri('/models'),
+    faceapi.nets.faceLandmark68Net.loadFromUri('/models'),
+    faceapi.nets.faceRecognitionNet.loadFromUri('/models'),
+    faceapi.nets.faceExpressionNet.loadFromUri('/models')
     console.log('.. Done.')
 
     setInterval(async () => {
-        const detections = await faceapi.detectAllFaces(
-            webcamElement, new faceapi.TinyFaceDetectorOptions()
-            ).withFaceLandmarks().withFaceExpressions()
+        const detections = await faceapi.detectAllFaces(video, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceExpressions()
         console.log(detections)
         }, 100)
     }
