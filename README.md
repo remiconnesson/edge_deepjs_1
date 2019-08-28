@@ -1,4 +1,4 @@
-This is repo is an experiment.
+This is repo is an experiment. The result can be seen in browser, here : https://remiconnesson.github.io/edge_deepjs_1/
 
 The goal of the experiment is to run in-browser face detection with only front-end stuff.
 
