@@ -1,11 +1,28 @@
-const video = document.getElementById('video')
+const webcamElement = document.getElementById('webcam');
 
-function startVideo() {
-    navigator.getUserMedia(
-        { video: {} },
-        stream => video.srcObjct = stream,
-        err => console.error(err)
-    )
+async function setupWebcam() {
+    return new Promise((resolve, reject) => {
+      const navigatorAny = navigator;
+      navigator.getUserMedia = navigator.getUserMedia ||
+          navigatorAny.webkitGetUserMedia || navigatorAny.mozGetUserMedia ||
+          navigatorAny.msGetUserMedia;
+      if (navigator.getUserMedia) {
+        navigator.getUserMedia({video: true},
+          stream => {
+            webcamElement.srcObject = stream;
+            webcamElement.addEventListener('loadeddata',  () => resolve(), false);
+          },
+          error => reject());
+      } else {
+        reject();
+      }
+    });
 }
 
-startVideo()
+async function app() {
+    console.log('Setting up webcam..');
+    await setupWebcam();
+    console.log('.. Done.')
+  }
+  
+app();

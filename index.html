@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- Load the latest version of TensorFlow.js -->
     <!-- <script src="https://unpkg.com/@tensorflow/tfjs"></script>-->
-    <script defer src="face-api.min.js"></script>
-    <script defer src="index.js"></script>
+    <script src="face-api.min.js"></script>
+
     <title>Real Time Face Detection with TfJs</title>
     <style>
       body {
@@ -21,7 +21,9 @@
     </style>
   </head>
   <body>
-    <video autoplay id="video" width="720" height="560"
-    muted></video>
+    <video id="video" width="720" height="560"
+    autoplay playslinline muted></video>
+    <!-- load app script last-->
+    <script src="index.js"></script>
   </body>
 </html>
