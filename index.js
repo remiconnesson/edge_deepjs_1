@@ -1,7 +1,7 @@
 const webcamElement = document.getElementById('webcam');
 
-/*
-console.log('Promises...')
+
+console.log('Model Promises...')
 
 Promise.all([
     faceapi.nets.TinyFaceDetector.loadFromUri('/models'),
@@ -9,7 +9,6 @@ Promise.all([
     faceapi.nets.faceRegognitionNet.loadFromUri('/models'),
     faceapi.nets.tinyExpressionNet.loadFromUri('/models')
 ]).then(app)
-*/
 
 
 async function setupWebcam() {
@@ -32,14 +31,11 @@ async function setupWebcam() {
 }
 
 async function app() {
+    console.log('Done loading models')
     console.log('Setting up webcam..');
     await setupWebcam();
     console.log('.. Done.');
-    console.log('Loading models..');
-    faceapi.nets.tinyFaceDetector.loadFromUri('/models'),
-    faceapi.nets.faceLandmark68Net.loadFromUri('/models'),
-    faceapi.nets.faceRecognitionNet.loadFromUri('/models'),
-    faceapi.nets.faceExpressionNet.loadFromUri('/models')
+
     console.log('.. Done.')
 
     setInterval(async () => {
@@ -50,4 +46,4 @@ async function app() {
 
 
 
-app();
+// app();
