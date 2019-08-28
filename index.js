@@ -3,10 +3,10 @@ const webcamElement = document.getElementById('webcam');
 console.log('Model Promises...')
 
 Promise.all([
-    faceapi.nets.tinyFaceDetector.loadFromUri('https://github.com/remiconnesson/edge_deepjs_1/tree/master/models'),
-    faceapi.nets.faceLandmark68Net.loadFromUri('https://github.com/remiconnesson/edge_deepjs_1/tree/master/models'),
-    faceapi.nets.faceRecognitionNet.loadFromUri('https://github.com/remiconnesson/edge_deepjs_1/tree/master/models'),
-    faceapi.nets.faceExpressionNet.loadFromUri('https://github.com/remiconnesson/edge_deepjs_1/tree/master/models')
+    faceapi.nets.tinyFaceDetector.loadFromUri('https://remiconnesson.github.io/edge_deepjs_1/models'),
+    faceapi.nets.faceLandmark68Net.loadFromUri('https://remiconnesson.github.io/edge_deepjs_1/models'),
+    faceapi.nets.faceRecognitionNet.loadFromUri('https://remiconnesson.github.io/edge_deepjs_1/models'),
+    faceapi.nets.faceExpressionNet.loadFromUri('https://remiconnesson.github.io/edge_deepjs_1/models')
 ]).then(app)
 
 
