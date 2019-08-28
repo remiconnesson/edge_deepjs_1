@@ -3,10 +3,13 @@ const webcamElement = document.getElementById('webcam');
 console.log('Model Promises...')
 
 Promise.all([
-    faceapi.nets.tinyFaceDetector.loadFromUri('https://remiconnesson.github.io/edge_deepjs_1/models'),
+    faceapi.nets.tinyFaceDetector.loadFromUri('https://remiconnesson.github.io/edge_deepjs_1/models')
+    /*
+    ,
     faceapi.nets.faceLandmark68Net.loadFromUri('https://remiconnesson.github.io/edge_deepjs_1/models'),
     faceapi.nets.faceRecognitionNet.loadFromUri('https://remiconnesson.github.io/edge_deepjs_1/models'),
     faceapi.nets.faceExpressionNet.loadFromUri('https://remiconnesson.github.io/edge_deepjs_1/models')
+    */
 ]).then(app)
 
 
@@ -34,10 +37,20 @@ async function app() {
     console.log('Setting up webcam..');
     await setupWebcam();
     console.log('.. Done.');
+    console.log('Creating Canvas')
+    const canvas = faceapi.createCanvasFromMedia(webcamElement)
+    document.body.append(canvas)
+    const displaySize = { width: webcamElement.width, 
+                          height: webcamElement.height }
+    faceapi.matchDimensions(canvas, displaySize)
     setInterval(async () => {
-        const detections = await faceapi.detectAllFaces(webcamElement, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceExpressions()
+        const detections = await faceapi.detectAllFaces(webcamElement, new faceapi.TinyFaceDetectorOptions())
+        /// .withFaceLandmarks().withFaceExpressions()
         console.log(detections)
         }, 100)
+        const resizedDetections = faceapi.resizeResults(detections, displaySize)
+        canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height)
+        faceapi.draw.drawDetections(canvas, resizedDetections)
     }
 
 
