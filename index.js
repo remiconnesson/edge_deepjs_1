@@ -5,8 +5,8 @@ console.log('Model Promises...')
 Promise.all([
     faceapi.nets.tinyFaceDetector.loadFromUri('https://remiconnesson.github.io/edge_deepjs_1/models'),
     faceapi.nets.faceLandmark68Net.loadFromUri('https://remiconnesson.github.io/edge_deepjs_1/models'),
-    faceapi.nets.faceRecognitionNet.loadFromUri('https://remiconnesson.github.io/edge_deepjs_1/models'),
-    faceapi.nets.faceExpressionNet.loadFromUri('https://remiconnesson.github.io/edge_deepjs_1/models')
+    faceapi.nets.faceExpressionNet.loadFromUri('https://remiconnesson.github.io/edge_deepjs_1/models'),
+    faceapi.nets.ageGenderNet.loadFromUri('https://remiconnesson.github.io/edge_deepjs_1/models')
 ]).then(app)
 
 
@@ -41,12 +41,22 @@ async function app() {
                           height: webcamElement.height }
     faceapi.matchDimensions(canvas, displaySize)
     setInterval(async () => {
-        const detections = await faceapi.detectAllFaces(webcamElement, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceExpressions()
+        const detections = await faceapi.detectAllFaces(webcamElement, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceExpressions().withAgeAndGender()
         const resizedDetections = faceapi.resizeResults(detections, displaySize)
         canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height)
         faceapi.draw.drawDetections(canvas, resizedDetections)
         faceapi.draw.drawFaceLandmarks(canvas, resizedDetections)
         faceapi.draw.drawFaceExpressions(canvas, resizedDetections)
+        detections.forEach(detection => {
+            const { age, gender, genderProbability } = detection
+            new faceapi.draw.DrawTextField(
+              [
+                `${faceapi.round(age, 0)} years`,
+                `${gender} (${faceapi.round(genderProbability)})`
+              ],
+              result.detection.box.bottomLeft
+            ).draw(out)
+          })
         }, 100)
 
     }
