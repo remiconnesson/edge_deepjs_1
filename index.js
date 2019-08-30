@@ -61,7 +61,7 @@ async function app() {
               result.detection.box.bottomRight
             ).draw(canvas)
           })
-        }, 500)
+        }, 200)
 
 
     }
