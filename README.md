@@ -6,5 +6,6 @@ Inspired by:
 * [tensorflow js , tranfer learnign tutorial](https://github.com/remiconnesson/tf_js_transfer_tutorial)
 * [face-api.js](https://github.com/justadudewhohacks/face-api.js#face-api.js-for-the-browser)
 * [a blog post by the author of face-api.js]()
+* [video tutorial using face-api.js](https://www.youtube.com/watch?v=CVClHLwv-4I)
 
 Yeah!
