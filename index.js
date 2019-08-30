@@ -46,8 +46,9 @@ async function app() {
         canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height)
         faceapi.draw.drawDetections(canvas, resizedDetections)
         faceapi.draw.drawFaceLandmarks(canvas, resizedDetections)
-        detections.forEach(detection => {
-            const { age, gender, genderProbability } = detection
+        detections.forEach(result => {
+            const { age, gender, genderProbability } = result
+            console.log(age, gender, genderProbability)
             new faceapi.draw.DrawTextField(
               [
                 `${faceapi.round(age, 0)} years`,
