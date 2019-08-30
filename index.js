@@ -47,7 +47,7 @@ async function app() {
         const detections = await faceapi.detectAllFaces(webcamElement, new faceapi.TinyFaceDetectorOptions())
         /// .withFaceLandmarks().withFaceExpressions()
         console.log(detections)
-        }, 100)
+        }, 500)
         const resizedDetections = faceapi.resizeResults(detections, displaySize)
         canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height)
         faceapi.draw.drawDetections(canvas, resizedDetections)
