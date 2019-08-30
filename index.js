@@ -42,10 +42,14 @@ async function app() {
     faceapi.matchDimensions(canvas, displaySize)
     setInterval(async () => {
         const detections = await faceapi.detectAllFaces(webcamElement, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceExpressions().withAgeAndGender()
+        
+        
         const resizedDetections = faceapi.resizeResults(detections, displaySize)
         canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height)
         faceapi.draw.drawDetections(canvas, resizedDetections)
         faceapi.draw.drawFaceLandmarks(canvas, resizedDetections)
+        faceapi.draw.drawFaceExpressions(canvas, resizedDetections)
+        console.log(detections)
         detections.forEach(result => {
             const { age, gender, genderProbability } = result
             console.log(age, gender, genderProbability)
@@ -54,11 +58,10 @@ async function app() {
                 `${faceapi.round(age, 0)} years`,
                 `${gender} (${faceapi.round(genderProbability)})`
               ],
-              result.detection.box.bottomLeft
-            ).draw(out)
+              result.detection.box.bottomRight
+            ).draw(canvas)
           })
         }, 500)
-        faceapi.draw.drawFaceExpressions(canvas, resizedDetections)
 
 
     }
